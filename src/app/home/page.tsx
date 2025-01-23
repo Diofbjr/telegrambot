@@ -1,8 +1,11 @@
+// app/home/page.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isUserAuthenticated, logout } from '@/lib/auth'; // Importe a função logout
+import { isUserAuthenticated } from '@/lib/auth';
+import { Spinner } from '@/components/Spinner/Spinner';
+import Header from '@/components/Header/header';
 
 export default function HomePage() {
   const router = useRouter();
@@ -20,29 +23,20 @@ export default function HomePage() {
     checkAuth();
   }, [router]);
 
-  // Função para fazer logout
-  const handleLogout = async () => {
-    const result = await logout();
-    if (result.success) {
-      router.push('/');
-    } else {
-      console.error('Erro ao fazer logout:', result.error);
-    }
-  };
-
   if (isLoading) {
-    return <div>Carregando...</div>; // Componente de carregamento
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <Spinner size="large" />
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-4">ENTROU</h1>
-      <button
-        onClick={handleLogout}
-        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-      >
-        Sair
-      </button>
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <Header />
+      <div className="flex flex-col items-center justify-center flex-grow">
+        <h1 className="text-4xl font-bold mb-4">ENTROU</h1>
+      </div>
     </div>
   );
 }

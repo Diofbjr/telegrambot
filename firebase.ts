@@ -1,10 +1,11 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
 
 let app: FirebaseApp;
 let auth: Auth;
+let db: Firestore;
 
-// Inicialize o Firebase apenas no lado do cliente
 if (typeof window !== 'undefined') {
   const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -16,7 +17,8 @@ if (typeof window !== 'undefined') {
   };
 
   app = initializeApp(firebaseConfig);
-  auth = getAuth(app);  // auth sempre será do tipo `Auth` no lado do cliente
+  auth = getAuth(app);
+  db = getFirestore(app);
 }
 
-export { auth };
+export { auth, db };

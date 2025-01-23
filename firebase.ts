@@ -1,9 +1,8 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 
-// Variável 'auth' que será exportada
 let app: FirebaseApp;
-let auth: Auth | undefined;
+let auth: Auth;
 
 // Inicialize o Firebase apenas no lado do cliente
 if (typeof window !== 'undefined') {
@@ -17,8 +16,7 @@ if (typeof window !== 'undefined') {
   };
 
   app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
+  auth = getAuth(app);  // auth sempre será do tipo `Auth` no lado do cliente
 }
 
-// Exportação da variável 'auth' (garantindo que ela só seja exportada uma vez)
 export { auth };

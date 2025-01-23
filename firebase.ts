@@ -1,9 +1,11 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { getAuth, Auth } from 'firebase/auth';
 
-let app, auth;
+// Variável 'auth' que será exportada
+let app: FirebaseApp;
+let auth: Auth | undefined;
 
-// Inicialização do Firebase apenas no lado do cliente
+// Inicialize o Firebase apenas no lado do cliente
 if (typeof window !== 'undefined') {
   const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -18,4 +20,5 @@ if (typeof window !== 'undefined') {
   auth = getAuth(app);
 }
 
+// Exportação da variável 'auth' (garantindo que ela só seja exportada uma vez)
 export { auth };

@@ -35,7 +35,11 @@ export async function signIn(email: string, password: string) {
       email,
       password,
     );
-    return { success: true, user: userCredential.user };
+    return { 
+      success: true, 
+      user: userCredential.user,
+      uid: userCredential.user.uid, // Adiciona o UID ao retorno
+    };
   } catch (error) {
     return { success: false, error: (error as Error).message };
   }

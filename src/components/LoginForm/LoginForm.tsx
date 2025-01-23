@@ -24,7 +24,8 @@ export const LoginForm = () => {
       const result = await signIn(email, password);
 
       if (result.success) {
-        router.push('/home');
+        // Redireciona para a página home com o UID como parâmetro
+        router.push(`/home?uid=${result.uid}`);
       } else {
         setError(result.error || 'Erro ao fazer login. Tente novamente.');
       }
